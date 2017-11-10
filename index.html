@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录百度账号</title>
+		<script type="application/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	</head>
+
+	<body>
+		<div>账户：<label>
+    <input id="account" type="text"/>
+</label></div>
+		<div>密码：<label>
+    <input type="password" onfocus="onPassfocus();">
+</label></div>
+		<div>验证码：<label>
+    <input type="text">
+</label><label id="vcodelabel"></label></div>
+	</body>
+	<script>
+		var onPassfocus;
+		$(function() {
+			onPassfocus = function() {
+				if(!$("#vcodelabel")[0].innerHTML&&$("#account").val()) {
+					var imgsrc = "https://wappass.baidu.com/cgi-bin/genimage?njG5506f5b8e918e238024714575b014d89ca38de06ec021420&v=";
+					var imgHtml = "<img id=\"vcodeImg\" src=\"" + imgsrc + new Date().getTime() + "\" onclick=\"this.src='" + imgsrc + "'+new Date().getTime()\"/>";
+					$("#vcodelabel").append(imgHtml);
+				}
+			}
+		});
+	</script>
+
+</html>
