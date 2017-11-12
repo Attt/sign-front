@@ -16,7 +16,7 @@
   limitations under the License
 -->
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
@@ -44,7 +44,8 @@
     <link rel="canonical" href="http://www.example.com/">
     -->
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/material.deep_purple-pink.min.css">
     <link rel="stylesheet" href="css/styles.css">
@@ -52,208 +53,576 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
     <link rel="stylesheet" href="css/materialize.min.css">
 
-          
+
     <style>
-    #view-source {
-      position: fixed;
-      display: block;
-      right: 0;
-      bottom: 0;
-      margin-right: 40px;
-      margin-bottom: 40px;
-      z-index: 900;
-    }
-    .card{
-    	transition: height 0.5s;
-		-moz-transition: height 0.5s; /* Firefox 4 */
-		-webkit-transition: height 0.5s; /* Safari 和 Chrome */
-		-o-transition: height 0.5s; /* Opera */
-    }
+        a{
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Chrome/Safari/Opera */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currentlynot supported by any browser */
+        }
+
+        #view-source {
+            position: fixed;
+            display: block;
+            right: 0;
+            bottom: 0;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            z-index: 900;
+        }
+
+        .card {
+            transition: height 0.5s;
+            -moz-transition: height 0.5s; /* Firefox 4 */
+            -webkit-transition: height 0.5s; /* Safari 和 Chrome */
+            -o-transition: height 0.5s; /* Opera */
+        }
+
+        .overlay {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 998;
+            background: darkgray;
+            opacity: 0.4;
+        }
+
+        .loading-spinner {
+            position: absolute;
+            z-index: 999;
+            top: 50%;
+            left: 45%;
+        }
+
+        .baidu-loading, .Keybord-loading {
+            display: none;
+        }
+
+        .keybord-key {
+            margin-bottom: 10px;
+            width: 90%;
+        }
+
+        .keybord-key-2 {
+            margin-bottom: 10px;
+            width: 95%;
+        }
+
+        .en-abc, .en-def, .en-ghi, .en-jkl, .en-mno, .en-pqr, .en-stu, .en-vwx, .en-yz {
+            height: 0;
+            transition: height .2s;
+            -moz-transition: height .2s; /* Firefox 4 */
+            -webkit-transition: height .2s; /* Safari and Chrome */
+            -o-transition: height .2s; /* Opera */
+        }
+
+        .en-abc button, .en-def button, .en-ghi button, .en-jkl button, .en-mno button, .en-pqr button, .en-stu button, .en-vwx button, .en-yz button {
+            height: 0;
+        }
     </style>
-  </head>
-  <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
-  	<div id="top" style="display: none;"></div>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-      <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary z-depth-4">
+</head>
+<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+<div id="top" style="display: none;"></div>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary z-depth-4">
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
-        <div class="mdl-layout--large-screen-only mdl-layout__header-row" style="display: -webkit-box;display: -webkit-inline-box;">
-          <h5>atpexgo.com</h5>&nbsp;&nbsp;
-          <h3>SignAssist</h3>
+        <div class="mdl-layout--large-screen-only mdl-layout__header-row"
+             style="display: -webkit-box;display: -webkit-inline-box;">
+            <h5>atpexgo.com</h5>&nbsp;&nbsp;
+            <h3>SignAssist</h3>
         </div>
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
-      </header>
-      <main class="mdl-layout__content">
+    </header>
+    <main class="mdl-layout__content">
         <div class="mdl-layout__tab-panel is-active" id="overview">
-          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--4dp">
-            <!--<header style="background: url(img/tiebaicon.jpg);background-size: cover;" class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
-            </header>-->
-            	<div class="card" style="margin: 0;">
-			    <div class="card-image waves-effect waves-block waves-light" style="margin-right: 35px;width: 100%;padding-top: 100px;
+            <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--4dp">
+                <!--<header style="background: url(img/tiebaicon.jpg);background-size: cover;" class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+                </header>-->
+                <div class="card hoverable" style="margin: 0;">
+                    <div class="card-image waves-effect waves-block waves-light" style="margin-right: 35px;width: 100%;padding-top: 100px;
 																																    padding-left: 30px;
 																																    padding-bottom: 100px;
 																																    padding-right: 30px;">
-			      <img class="activator" src="img/tieba.gif">
-			    </div>
-			    <div class="card-content">
-			      <span class="activator card-title grey-text text-darken-4"><!-- <i class="material-icons left" style="font-size: 48px;margin-bottom: 20px;color: rgb(103,58,183);">swap_vertical_circle</i> --><img src="img/doge.png" style="height: 48px;width: 48px;pointer-events:none;"></span>
-			    </div>
-			    <div class="card-reveal" style="height: auto;">
-			      <span id="cardTitle" class="card-title grey-text text-darken-4"><!-- <i class="material-icons" style="width: 48px;height: 48px;pointer-events:none;font-size:48px;color: rgb(103,58,183);">swap_vertical_circle</i> --><!--<img class="activator" src="img/tiebaicon.jpg" style="width: 48px;height: 48px;pointer-events:none;">--><img src="img/doge.png" style="height: 48px;width: 48px;pointer-events:none;"></span>
-			      		<div style=" margin:0 auto;text-align: center;">
-			      			<div style=" margin:0 auto;text-align: center;" class="signin-parts">
-					      		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-div input-div-upper">
-		                            <input autocomplete="off" class="mdl-textfield__input" type="text" id="account" style="margin-bottom: 10px;" pattern="1(3[0-9]|4[57]|5[0-35-9]|7[0135678]|8[0-9])\d{8}">
-		                            <label class="mdl-textfield__label login-label" for="account">Tieba Account(phone number)</label>
-		                            <span class="mdl-textfield__error login-error-label">phone number? Nonexistent</span>
-		                        </div>
-	                       </div>
-		                    <!-- <div style=" margin:0 auto;text-align: center;" class="pass-input">
-		                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-div input-div-upper">
-		                            <input autocomplete="off" class="mdl-textfield__input" type="password" id="password">
-		                            <label class="mdl-textfield__label login-label" for="password">密码</label>
-		                        </div>
-		                    </div> -->
-		                    <div style=" margin:0 auto;text-align: center;" class="signin-parts">
-		                        <div style="display: inline-flex;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-div vcode-div input-div-upper">
-			                            <input autocomplete="off" class="mdl-textfield__input" style="width: 60%;" type="text" id="vcode" maxlength="4" disabled>
-			                            <label class="mdl-textfield__label login-label" for="vcode">Verify Code</label>
-			                            <img src="img/forgive.gif" style="width: 120px;height: 48px;padding-left: 10px;" >
-	                        	</div>
-	                        </div>
-	                        <div style=" margin:0 auto;text-align: right;" class="signin-parts">
-	                        	 <button id="tryLoginButton"
-	                          		class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary only-button">
-	                            		Sign in
-	                        	</button>
-	                        </div>
+                        <img class="activator" src="img/tieba.gif">
+                    </div>
+                    <div class="card-content">
+                        <span class="activator card-title grey-text text-darken-4"><!-- <i class="material-icons left" style="font-size: 48px;margin-bottom: 20px;color: rgb(103,58,183);">swap_vertical_circle</i> --><img
+                                src="img/doge.png" style="height: 48px;width: 48px;pointer-events:none;"></span>
+                    </div>
+                    <div class="card-reveal" style="height: auto;">
+                        <span id="cardTitle" class="card-title grey-text text-darken-4"><!-- <i class="material-icons" style="width: 48px;height: 48px;pointer-events:none;font-size:48px;color: rgb(103,58,183);">swap_vertical_circle</i> -->
+                            <!--<img class="activator" src="img/tiebaicon.jpg" style="width: 48px;height: 48px;pointer-events:none;">--><img
+                                    src="img/doge.png" style="height: 48px;width: 48px;pointer-events:none;"></span>
+                        <div style=" margin:0 auto;text-align: center;">
+                            <!-- sign-in parts BEGIN -->
+                            <div style=" margin:0 auto;text-align: center;" class="signin-parts">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-div input-div-upper">
+                                    <input autocomplete="off" class="mdl-textfield__input" type="tel" id="account"
+                                           style="margin-bottom: 10px;"
+                                           pattern="1(3[0-9]|4[57]|5[0-35-9]|7[0135678]|8[0-9])\d{8}">
+                                    <label class="mdl-textfield__label login-label" for="account">Tieba Account(phone
+                                        number)</label>
+                                    <span class="mdl-textfield__error login-error-label">phone number? Nonexistent</span>
+                                </div>
+                            </div>
+                            <div style=" margin:0 auto;text-align: center;" class="signin-parts">
+                                <div style="display: inline-flex;"
+                                     class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label input-div vcode-div input-div-upper">
+                                    <input autocomplete="off" class="mdl-textfield__input" style="width: 60%;"
+                                           type="number" id="vcode" maxlength="4" disabled>
+                                    <label class="mdl-textfield__label login-label" for="vcode">Sms Code</label>
+                                    <img src="img/forgive.gif" style="width: 120px;height: 48px;padding-left: 10px;">
+                                </div>
+                            </div>
+                            <div style=" margin:0 auto;text-align: right;" class="signin-parts">
+                                <button id="tryLoginButton" style="display: none;"
+                                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary only-button">
+                                    Sign in
+                                </button>
+                                <button id="sendSmsButton"
+                                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary only-button">
+                                    Send Sms
+                                </button>
+                            </div>
+                            <!-- sign-in parts END -->
 
-	                        <div style="margin-top: 24px;text-align: left;display: none;" class="post-signin-parts">
+                            <!-- post-sign-in parts BEGIN -->
+                            <div style="margin-top: 24px;text-align: left;display: none;" class="post-signin-parts">
 	                        	 <span class="mdl-chip mdl-chip--contact mdl-chip--deletable">
-	                        	 	<div class="mdl-chip__contact" style="background: url(img/level.gif);background-repeat: no-repeat;background-position: center;font-size: 14px;font-weight: 600;line-height: 14px;padding-top: 10px;pointer-events: none;" disabled>9</div>
-								    <!-- <img class="mdl-chip__contact" src="img/level.gif">1</img> -->
-								    <span class="mdl-chip__text" style="font-weight: bold;cursor: pointer;padding-right: 10px;">戒赌吧</span>
-								   <a href="javascript:void(0);" class="mdl-chip__action" style="line-height: 25px;margin-right: 6px;font-size: 12px;">未签</a>
+	                        	 	<div class="mdl-chip__contact"
+                                         style="background: url(img/level.gif);background-repeat: no-repeat;background-position: center;font-size: 14px;font-weight: 600;line-height: 14px;padding-top: 10px;pointer-events: none;"
+                                         disabled>9</div>
+								    <span class="mdl-chip__text tooltipped"
+                                          style="font-weight: bold;cursor: pointer;padding-right: 10px;"
+                                          data-position="top" data-delay="10" data-tooltip="经验值1000/3991">戒赌吧</span>
+                                     <a href="javascript:void(0);" class="mdl-chip__action"
+                                        style="line-height: 25px;margin-right: 6px;font-size: 12px;">未签</a>
 								</span>
-	                        	<span class="mdl-chip mdl-chip--contact mdl-chip--deletable">
-	                        	 	<div class="mdl-chip__contact" style="background: url(img/level.gif);background-repeat: no-repeat;background-position: center;font-size: 14px;font-weight: 600;line-height: 14px;padding-top: 10px;pointer-events: none;" disabled>13</div>
-								    <!-- <img class="mdl-chip__contact" src="img/level.gif">1</img> -->
-								    <span class="mdl-chip__text" style="font-weight: bold;cursor: pointer;padding-right: 10px;">李毅吧</span>
-								    <a href="javascript:void(0);" class="mdl-chip__action" style="line-height: 25px;margin-right: 6px;font-size: 12px;">已签</a>
+                                <span class="mdl-chip mdl-chip--contact mdl-chip--deletable">
+	                        	 	<div class="mdl-chip__contact"
+                                         style="background: url(img/level.gif);background-repeat: no-repeat;background-position: center;font-size: 14px;font-weight: 600;line-height: 14px;padding-top: 10px;pointer-events: none;"
+                                         disabled>13</div>
+								    <span class="mdl-chip__text tooltipped"
+                                          style="font-weight: bold;cursor: pointer;padding-right: 10px;"
+                                          data-position="top" data-delay="10" data-tooltip="经验值1000/3991">李毅吧</span>
+								    <a href="javascript:void(0);" class="mdl-chip__action"
+                                       style="line-height: 25px;margin-right: 6px;font-size: 12px;">已签</a>
 								</span>
-								<span class="mdl-chip mdl-chip--contact mdl-chip--deletable">
-	                        	 	<div class="mdl-chip__contact" style="background: url(img/level.gif);background-repeat: no-repeat;background-position: center;font-size: 14px;font-weight: 600;line-height: 14px;padding-top: 10px;pointer-events: none;" disabled>10</div>
-								    <!-- <img class="mdl-chip__contact" src="img/level.gif">1</img> -->
-								    <span class="mdl-chip__text" style="font-weight: bold;cursor: pointer;padding-right: 10px;">斗破苍穹吧</span>
-								    <a href="javascript:void(0);" class="mdl-chip__action" style="line-height: 25px;margin-right: 6px;font-size: 12px;">已签</a>
+                                <span class="mdl-chip mdl-chip--contact mdl-chip--deletable">
+	                        	 	<div class="mdl-chip__contact"
+                                         style="background: url(img/level.gif);background-repeat: no-repeat;background-position: center;font-size: 14px;font-weight: 600;line-height: 14px;padding-top: 10px;pointer-events: none;"
+                                         disabled>10</div>
+								    <span class="mdl-chip__text tooltipped"
+                                          style="font-weight: bold;cursor: pointer;padding-right: 10px;"
+                                          data-position="top" data-delay="10" data-tooltip="经验值1000/3991">斗破苍穹吧</span>
+								    <a href="javascript:void(0);" class="mdl-chip__action"
+                                       style="line-height: 25px;margin-right: 6px;font-size: 12px;">已签</a>
 								</span>
-								<span class="mdl-chip mdl-chip--contact mdl-chip--deletable">
-	                        	 	<div class="mdl-chip__contact" style="background: url(img/level.gif);background-repeat: no-repeat;background-position: center;font-size: 14px;font-weight: 600;line-height: 14px;padding-top: 10px;pointer-events: none;" disabled>12</div>
-								    <!-- <img class="mdl-chip__contact" src="img/level.gif">1</img> -->
-								    <span class="mdl-chip__text" style="font-weight: bold;cursor: pointer;padding-right: 10px;">魔兽世界吧</span>
-								    <a href="javascript:void(0);" class="mdl-chip__action" style="line-height: 25px;margin-right: 6px;font-size: 12px;">已签</a>
+                                <span class="mdl-chip mdl-chip--contact mdl-chip--deletable">
+	                        	 	<div class="mdl-chip__contact"
+                                         style="background: url(img/level.gif);background-repeat: no-repeat;background-position: center;font-size: 14px;font-weight: 600;line-height: 14px;padding-top: 10px;pointer-events: none;"
+                                         disabled>12</div>
+								    <span class="mdl-chip__text tooltipped"
+                                          style="font-weight: bold;cursor: pointer;padding-right: 10px;"
+                                          data-position="top" data-delay="10" data-tooltip="经验值1000/3991">魔兽世界吧</span>
+								    <a href="javascript:void(0);" class="mdl-chip__action"
+                                       style="line-height: 25px;margin-right: 6px;font-size: 12px;">已签</a>
 								</span>
-							</div>
+                            </div>
+                            <!-- post-sign-in parts END -->
                         </div>
-			    </div>
-			  </div>
-          </section>
-          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--4dp">
-            <div class="mdl-card mdl-cell mdl-cell--12-col">
-              <div class="mdl-card__supporting-text">
-                <h4>emmmmmmm...</h4>
-              </div>
-            </div>
-          </section>
-          <section class="section--footer mdl-color--dark mdl-grid mdl-mega-footer">
-            <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone ">
-              <div class="z-depth-4 section__circle-container__circle mdl-color--accent section__circle--big" style="background: url(img/mail-head.jpg) center;background-size: contain;">
-              </div>
-            </div>
-            <div class="section__text mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone ">
-              <h4>Contact me</h4>
-              <h5><a href="mailto:atpexgo@gmail.com" style="display: inline-flex;"><i class="material-icons">mail</i>Gmail</a></h5>
-              <h5><a href="mailto:atpexgo@hotmail.com" style="display: inline-flex;color: red;"><i class="material-icons">mail</i>Hotmail</a></h5>
-            </div>
-          </section>
+                        <!-- spinner(loading circle) with background layer(mask) -->
+                        <div class="baidu-loading loading-spinner">
+                            <div class="preloader-wrapper small active">
+                                <div class="spinner-layer spinner-purple-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="baidu-loading overlay"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--4dp">
+                <div class="mdl-card mdl-cell mdl-cell--12-col">
+                    <div class="mdl-card__supporting-text">
+                        <h4>emmmm...</h4>
+                    </div>
+                </div>
+            </section>
+            <section class="section--footer mdl-color--dark mdl-grid mdl-mega-footer">
+                <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone ">
+                    <div class="z-depth-4 section__circle-container__circle mdl-color--accent section__circle--big"
+                         style="background: url(img/mail-head.jpg) center;background-size: contain;">
+                    </div>
+                </div>
+                <div class="section__text mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone ">
+                    <h4>Contact me</h4>
+                    <h5><a href="mailto:atpexgo@gmail.com" style="display: inline-flex;"><i
+                            class="material-icons">mail</i>Gmail</a></h5>
+                    <h5><a href="mailto:atpexgo@hotmail.com" style="display: inline-flex;color: red;"><i
+                            class="material-icons">mail</i>Hotmail</a></h5>
+                </div>
+            </section>
         </div>
-        
-      </main>
+    </main>
+</div>
+<!-- Mobile Modal Structure -->
+<div id="mobile-modal" class="modal bottom-sheet">
+    <div class="modal-content" style="text-align: center;padding-bottom: 0">
+        <img src="img/forgive.gif" style="width: 120px;height: 48px;padding-left: 10px;">
+        <div class="row" style="margin-bottom: 0">
+            <div class="input-field col s3" style="padding:0"><input unselectable="on" readonly placeholder="*" id="v1"
+                                                                     maxlength="1"
+                                                                     style="text-align: center;width: 90%;"
+                                                                     class="validate"></div>
+            <div class="input-field col s3" style="padding:0"><input unselectable="on" readonly placeholder="*" id="v2"
+                                                                     maxlength="1"
+                                                                     style="text-align: center;width: 90%;"
+                                                                     class="validate"></div>
+            <div class="input-field col s3" style="padding:0"><input unselectable="on" readonly placeholder="*" id="v3"
+                                                                     maxlength="1"
+                                                                     style="text-align: center;width: 90%;"
+                                                                     class="validate"></div>
+            <div class="input-field col s3" style="padding:0"><input unselectable="on" readonly placeholder="*" id="v4"
+                                                                     maxlength="1"
+                                                                     style="text-align: center;width: 90%;"
+                                                                     class="validate"></div>
+        </div>
+        <p style="font-size: 10px">long press the number button to type EN words</p>
+        <div class="row" style="margin-bottom: 0">
+            <div class="col s4" style="padding:0"><button onclick="keybordTouch(1)" class="waves-effect waves-light btn keybord-key long-abc">1abc</button></div>
+            <div class="col s4" style="padding:0"><button onclick="keybordTouch(2)" class="waves-effect waves-light btn keybord-key long-def">2def</button></div>
+            <div class="col s4" style="padding:0"><button onclick="keybordTouch(3)" class="waves-effect waves-light btn keybord-key long-ghi">3ghi</button></div>
+            <div class="col s4 en-abc" style="padding:0"><button onclick="keybordTouch('A')" class="waves-effect waves-light btn keybord-key">a</button></div>
+            <div class="col s4 en-abc" style="padding:0"><button onclick="keybordTouch('B')" class="waves-effect waves-light btn keybord-key">b</button></div>
+            <div class="col s4 en-abc" style="padding:0"><button onclick="keybordTouch('C')" class="waves-effect waves-light btn keybord-key">c</button></div>
+            <div class="col s4 en-def" style="padding:0"><button onclick="keybordTouch('D')" class="waves-effect waves-light btn keybord-key">d</button></div>
+            <div class="col s4 en-def" style="padding:0"><button onclick="keybordTouch('E')" class="waves-effect waves-light btn keybord-key">e</button></div>
+            <div class="col s4 en-def" style="padding:0"><button onclick="keybordTouch('F')" class="waves-effect waves-light btn keybord-key">f</button></div>
+            <div class="col s4 en-ghi" style="padding:0"><button onclick="keybordTouch('G')" class="waves-effect waves-light btn keybord-key">g</button></div>
+            <div class="col s4 en-ghi" style="padding:0"><button onclick="keybordTouch('H')" class="waves-effect waves-light btn keybord-key">h</button></div>
+            <div class="col s4 en-ghi" style="padding:0"><button onclick="keybordTouch('I')" class="waves-effect waves-light btn keybord-key">i</button></div>
+            <div class="col s4" style="padding:0"><button onclick="keybordTouch(4)" class="waves-effect waves-light btn keybord-key long-jkl">4jkl</button></div>
+            <div class="col s4" style="padding:0"><button onclick="keybordTouch(5)" class="waves-effect waves-light btn keybord-key long-mno">5mno</button></div>
+            <div class="col s4" style="padding:0"><button onclick="keybordTouch(6)" class="waves-effect waves-light btn keybord-key long-pqr">6pqr</button></div>
+            <div class="col s4 en-jkl" style="padding:0"><button onclick="keybordTouch('J')" class="waves-effect waves-light btn keybord-key">j</button></div>
+            <div class="col s4 en-jkl" style="padding:0"><button onclick="keybordTouch('K')" class="waves-effect waves-light btn keybord-key">k</button></div>
+            <div class="col s4 en-jkl" style="padding:0"><button onclick="keybordTouch('L')" class="waves-effect waves-light btn keybord-key">l</button></div>
+            <div class="col s4 en-mno" style="padding:0"><button onclick="keybordTouch('M')" class="waves-effect waves-light btn keybord-key">m</button></div>
+            <div class="col s4 en-mno" style="padding:0"><button onclick="keybordTouch('N')" class="waves-effect waves-light btn keybord-key">n</button></div>
+            <div class="col s4 en-mno" style="padding:0"><button onclick="keybordTouch('O')" class="waves-effect waves-light btn keybord-key">o</button></div>
+            <div class="col s4 en-pqr" style="padding:0"><button onclick="keybordTouch('P')" class="waves-effect waves-light btn keybord-key">p</button></div>
+            <div class="col s4 en-pqr" style="padding:0"><button onclick="keybordTouch('Q')" class="waves-effect waves-light btn keybord-key">q</button></div>
+            <div class="col s4 en-pqr" style="padding:0"><button onclick="keybordTouch('R')" class="waves-effect waves-light btn keybord-key">r</button></div>
+            <div class="col s4" style="padding:0"><button onclick="keybordTouch(7)" class="waves-effect waves-light btn keybord-key long-stu">7stu</button></div>
+            <div class="col s4" style="padding:0"><button onclick="keybordTouch(8)" class="waves-effect waves-light btn keybord-key long-vwx">8vwx</button></div>
+            <div class="col s4" style="padding:0"><button onclick="keybordTouch(9)" class="waves-effect waves-light btn keybord-key long-yz">9yz</button></div>
+            <div class="col s4 en-stu" style="padding:0"><button onclick="keybordTouch('S')" class="waves-effect waves-light btn keybord-key">s</button></div>
+            <div class="col s4 en-stu" style="padding:0"><button onclick="keybordTouch('T')" class="waves-effect waves-light btn keybord-key">t</button></div>
+            <div class="col s4 en-stu" style="padding:0"><button onclick="keybordTouch('U')" class="waves-effect waves-light btn keybord-key">u</button></div>
+            <div class="col s4 en-vwx" style="padding:0"><button onclick="keybordTouch('V')" class="waves-effect waves-light btn keybord-key">v</button></div>
+            <div class="col s4 en-vwx" style="padding:0"><button onclick="keybordTouch('W')" class="waves-effect waves-light btn keybord-key">w</button></div>
+            <div class="col s4 en-vwx" style="padding:0"><button onclick="keybordTouch('X')" class="waves-effect waves-light btn keybord-key">x</button></div>
+            <div class="col s4 en-yz" style="padding:0"><button onclick="keybordTouch('Y')" class="waves-effect waves-light btn keybord-key">y</button></div>
+            <div class="col s4 en-yz" style="padding:0"><button onclick="keybordTouch('Z')" class="waves-effect waves-light btn keybord-key">z</button></div>
+            <div class="col s8" style="padding:0"><button onclick="keybordTouch(0)" class="waves-effect waves-light btn keybord-key-2">0</button></div>
+            <div class="col s4" style="padding:0"><button onclick="keybordTouch('b')" class="waves-effect waves-light btn keybord-key"><i class="material-icons">backspace</i></button></div>
+        </div>
     </div>
-    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <!-- Import JQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!-- Compiled and minified JavaScript -->
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-  	<script>
-  		var onCardReveal;
-  		var onCardTitle;
-  		var showVcode;
-  		var hideVcode;
-  		var originHeight;
+    <div class="modal-footer" style="padding-top: 0;">
+        <a href="javascript:hideModal();" class=" modal-action modal-close waves-effect waves-green btn-flat"><i
+                class="material-icons">arrow_drop_down_circle</i></a>
+    </div>
+    <!-- spinner(loading circle) with background layer(mask) -->
+    <div class="Keybord-loading loading-spinner">
+        <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-purple-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="Keybord-loading overlay"></div>
+</div>
+<!-- Normal Modal Structure -->
+<div id="normal-modal" class="modal">
+    <div class="modal-content">
+        <h4>模态标题</h4>
+        <p>一堆文本</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">同意</a>
+    </div>
+</div>
+<script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<!-- Import JQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script>
+    var originHeight;
 
-  		var flipper = false;
-  		$(function(){
-  			onCardReveal = function(){
-  				originHeight = $(".card").height()
-	  			var height = $(".card-reveal").height() + $(".card-reveal").css("padding-top").replace("px","") * 2
-	  			$(".card").height(height)
-  			}
-  			
-  			onCardTitle = function(){
-  				$(".card").height(originHeight)
-  			}
+    var keybordTouch;
+    var hideModal;
+    var alreadyFocusOnAccount = true;
+    $(function () {
+        $.fn.longPress = function (fn) {
+            var timeout = undefined;
+            var $this = this;
+            for (var i = 0; i < $this.length; i++) {
+                $this[i].addEventListener('touchstart', function (event) {
+                    timeout = setTimeout(fn, 800);  //长按时间超过800ms，则执行传入的方法
+                }, false);
+                $this[i].addEventListener('touchend', function (event) {
+                    clearTimeout(timeout);  //长按时间少于800ms，不会执行传入的方法
+                }, false);
+            }
+        }// define long press
 
-  			focusOnVcode = function(){
-				$("#vcode").removeAttr("disabled")
-				$("#vcode").parent().removeClass("is-disabled")
-				$("#account").attr('disabled','disabled')
-				flipper = true
-  			}
+        $('.modal').modal();// init modal parts
 
-  			focusOnAccount = function(){
-				$("#account").removeAttr("disabled")
-				$("#account").parent().removeClass("is-disabled")
-				$("#vcode").attr('disabled','disabled')
-				flipper = false
-  			}
+        keybordTouch = function (val) {
+            if (val === 'b') {
+                delCode()
+            } else {
+                addCode(val)
+            }
+        }
 
-  			accountValid = function(){
-  				return $("#account").parent().hasClass("is-dirty")&&!$("#account").parent().hasClass("is-invalid");
-  			}
 
-  			vcodeValid = function(){
-  				return $("#vcode").parent().hasClass("is-dirty")&&!$("#vcode").parent().hasClass("is-invalid");
-  			}
-  			
-  			login = function(){
-  				$(".signin-parts").hide();
-  				$(".post-signin-parts").show();
-  				var height = $(".card-reveal").height() + $(".card-reveal").css("padding-top").replace("px","") * 2
-	  			$(".card").height(height)
-  			}
+        var shutEn = function (enClassToKeep,enClass) {
+            if (enClassToKeep != enClass) {
+                $(enClass).children().height(0)
+                $(enClass).height(0)
+            }
+        }
 
-  			$(".activator").click(function(){
-  				onCardReveal()
-  			})
-  			
-  			$("#cardTitle").click(function(){
-  				onCardTitle()
-  			})
-  			
-  			$("#tryLoginButton").click(function(){
-  				if(!flipper&&accountValid()){
-  					focusOnVcode();
-  				}else{
-  					if(vcodeValid()){
-  						login();
-  					}
-  				}
-  				// var height = $(".card-reveal").height() + $(".card-reveal").css("padding-top").replace("px","") * 2
-	  			// $(".card").height(height)
-  			})
-  		})
-  	</script>
-  </body>
+        var shutOthers = function (enClassToKeep) {
+            shutEn(enClassToKeep,".en-abc")
+            shutEn(enClassToKeep,".en-def")
+            shutEn(enClassToKeep,".en-ghi")
+            shutEn(enClassToKeep,".en-jkl")
+            shutEn(enClassToKeep,".en-mno")
+            shutEn(enClassToKeep,".en-pqr")
+            shutEn(enClassToKeep,".en-stu")
+            shutEn(enClassToKeep,".en-vwx")
+            shutEn(enClassToKeep,".en-yz")
+        }
+
+        var shutAllEn = function () {
+            shutOthers()
+        }
+
+        var showEn = function (enClass) {
+            if ($(enClass).height() != 1) {
+                $(enClass).children().height(0)
+                $(enClass).height(0)
+            } else {
+                shutOthers(enClass)
+                $(enClass).children().height($($(".s4")[0]).children().height())
+                $(enClass).height($('.s4').height())
+            }
+        }
+        $('.long-abc').longPress(function () {
+            showEn('.en-abc')
+        });
+        $('.long-def').longPress(function () {
+            showEn('.en-def')
+        });
+        $('.long-ghi').longPress(function () {
+            showEn('.en-ghi')
+        });
+        $('.long-jkl').longPress(function () {
+            showEn('.en-jkl')
+        });
+        $('.long-mno').longPress(function () {
+            showEn('.en-mno')
+        });
+        $('.long-pqr').longPress(function () {
+            showEn('.en-pqr')
+        });
+        $('.long-stu').longPress(function () {
+            showEn('.en-stu')
+        });
+        $('.long-vwx').longPress(function () {
+            showEn('.en-vwx')
+        });
+        $('.long-yz').longPress(function () {
+            showEn('.en-yz')
+        });
+
+        var addCode = function (val) {
+            var now = 1;
+            for (var i = 1; i <= 4; i++) {
+                if (!$('#v' + i).val()) {
+                    now = i;
+                    $('#v' + i).val(val)
+                    break;
+                }
+            }
+            // if finished
+            if (now === 4) {
+                startKeybordLoading()
+                setTimeout(function () {
+                    hideModal()
+                    endKeybordLoading()
+                }, 2000)
+            }
+        }
+
+        var delCode = function () {
+            for (var i = 4; i >= 1; i--) {
+                if ($('#v' + i).val()) {
+                    $('#v' + i).val('')
+                    break;
+                }
+            }
+        }
+
+        var delAllCode = function () {
+            for (var i = 4; i >= 1; i--) {
+                if ($('#v' + i).val()) {
+                    $('#v' + i).val('')
+                }
+            }
+        }
+
+        var onCardReveal = function () {
+            originHeight = $(".card").height()
+            var height = $(".card-reveal").height() + $(".card-reveal").css("padding-top").replace("px", "") * 2
+            $(".card").height(height)
+        }
+
+        var onCardTitle = function () {
+            $(".card").height(originHeight)
+        }
+
+        var focusOnVcode = function () {
+            $("#vcode").removeAttr("disabled")
+            $("#vcode").parent().removeClass("is-disabled")
+            $("#account").attr('disabled', 'disabled')
+            alreadyFocusOnAccount = false
+        }
+
+        var focusOnAccount = function () {
+            $("#account").removeAttr("disabled")
+            $("#account").parent().removeClass("is-disabled")
+            $("#vcode").attr('disabled', 'disabled')
+            alreadyFocusOnAccount = true
+        }
+
+        var accountValid = function () {
+            return $("#account").parent().hasClass("is-dirty") && !$("#account").parent().hasClass("is-invalid");
+        }
+
+        var vcodeValid = function () {
+            return $("#vcode").parent().hasClass("is-dirty") && !$("#vcode").parent().hasClass("is-invalid");
+        }
+
+        var login = function () {
+            $(".signin-parts").hide();
+            $(".post-signin-parts").show();
+            var height = $(".card-reveal").height() + $(".card-reveal").css("padding-top").replace("px", "") * 2
+            $(".card").height(height)
+        }
+
+        var startBaiduLoading = function () {
+            $(".baidu-loading").show()
+        }
+
+        var endBaiduLoading = function () {
+            $(".baidu-loading").hide()
+        }
+        var startKeybordLoading = function () {
+            $(".Keybord-loading").show()
+        }
+
+        var endKeybordLoading = function () {
+            $(".Keybord-loading").hide()
+        }
+
+        var showModal = function () {
+            if (window.innerWidth <= 600) {// responsive
+                $('#mobile-modal').modal('open');
+            } else {
+                $('#normal-modal').modal('open');
+            }
+            //prevent default event on modal-overlay
+            var modalOverlay = $('.modal-overlay');
+            modalOverlay.on('click', function () {
+                event.preventDefault()
+            });
+            modalOverlay.on('touchstart', function () {
+                event.preventDefault()
+            });
+            modalOverlay.on('touchend', function () {
+                event.preventDefault()
+            });
+        }
+
+        hideModal = function () {
+            if (window.innerWidth <= 600) {// responsive
+                $('#mobile-modal').modal('close');
+                // clear code
+                delAllCode()
+            } else {
+                $('#normal-modal').modal('close');
+            }
+        }
+
+        $(".activator").click(function () {
+            onCardReveal()
+        })
+
+        $("#cardTitle").click(function () {
+            onCardTitle()
+        })
+
+        $("#sendSmsButton").click(function () {
+            if (alreadyFocusOnAccount && accountValid()) {// if now focus on account and account input is valid...
+                startBaiduLoading()
+                // send sms
+                // and...
+                setTimeout(function () {
+                    showModal()
+//                    focusOnVcode()
+                    $("#sendSmsButton").hide()
+                    $("#tryLoginButton").show()
+                    endBaiduLoading()
+                }, 2000)
+            }
+        })
+
+        $("#tryLoginButton").click(function () {
+            if (!alreadyFocusOnAccount && vcodeValid()) {// if now focus on v-code and if v-code input is valid...
+                login();
+            }
+            // var height = $(".card-reveal").height() + $(".card-reveal").css("padding-top").replace("px","") * 2
+            // $(".card").height(height)
+        })
+    })
+</script>
+</body>
 </html>
